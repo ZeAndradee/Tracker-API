@@ -1,16 +1,16 @@
 import connection from "../config.js";
 
-export const addUsers = (req, res) => {
+export const addUser = (req, res) => {
   const q =
-    "INSERT INTO users(`username`, `email`, `password`, `name`, `userimage`, `userbio`) VALUES(?)";
+    "INSERT INTO user(`username`, `email`, `password`, `name`, `userbio`, `userimage`) VALUES(?)";
 
   const values = [
     req.body.username,
     req.body.email,
     req.body.password,
     req.body.name,
-    req.body.userimage,
     req.body.userbio,
+    req.body.userimage,
   ];
 
   connection.query(q, [values], (err) => {
@@ -20,8 +20,8 @@ export const addUsers = (req, res) => {
   });
 };
 
-export const getUsers = (_, res) => {
-  const q = "SELECT * FROM users";
+export const getUser = (_, res) => {
+  const q = "SELECT * FROM user";
 
   connection.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -32,7 +32,7 @@ export const getUsers = (_, res) => {
 
 export const updateUser = (req, res) => {
   const q =
-    "UPDATE users SET `username` = ?, `email` = ?, `password` = ?, `name` = ?, `userimage` = ?, `userbio` = ?  WHERE `id` = ?";
+    "UPDATE user SET `username` = ?, `email` = ?, `password` = ?, `name` = ?, `userimage` = ?, `userbio` = ?  WHERE `id` = ?";
 
   const values = [
     req.body.username,
@@ -51,7 +51,7 @@ export const updateUser = (req, res) => {
 };
 
 export const deleteUser = (req, res) => {
-  const q = "DELETE FROM users WHERE `id` = ?";
+  const q = "DELETE FROM user WHERE `id` = ?";
 
   connection.query(q, [req.params.id], (err) => {
     if (err) return res.json(err);

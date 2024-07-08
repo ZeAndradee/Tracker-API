@@ -37,6 +37,7 @@ export const updateSpotifyData = (req, res) => {
     req.body.SPOTIFY_CLIENT_ID,
     req.body.SPOTIFY_CLIENT_SECRET,
     req.body.SPOTIFY_TOKEN,
+    req.params.id,
   ];
 
   connection.query(q, [...values], (err) => {

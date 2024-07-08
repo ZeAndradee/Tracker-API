@@ -2,12 +2,13 @@ import connection from "../config.js";
 
 export const addSpotifyData = (req, res) => {
   const q =
-    "INSERT INTO SpotifyData(`VITE_LAST_FM_API_KEY`, `VITE_SPOTIFY_CLIENT_ID`, `VITE_SPOTIFY_CLIENT_ID`, `name`, `userbio`, `userimage`) VALUES(?)";
+    "INSERT INTO SpotifyData(`LAST_FM_API_KEY`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`,`SPOTIFY_TOKEN`) VALUES(?)";
 
   const values = [
-    req.body.VITE_LAST_FM_API_KEY,
-    req.body.VITE_SPOTIFY_CLIENT_ID,
-    req.body.VITE_SPOTIFY_CLIENT_ID,
+    req.body.LAST_FM_API_KEY,
+    req.body.SPOTIFY_CLIENT_ID,
+    req.body.SPOTIFY_CLIENT_SECRET,
+    req.body.SPOTIFY_TOKEN,
   ];
 
   connection.query(q, [values], (err) => {
@@ -29,12 +30,13 @@ export const getSpotifyData = (_, res) => {
 
 export const updateSpotifyData = (req, res) => {
   const q =
-    "UPDATE SpotifyData SET `VITE_LAST_FM_API_KEY` = ?, `VITE_SPOTIFY_CLIENT_ID` = ?, `password` = ?, `name` = ?, `userimage` = ?, `userbio` = ?  WHERE `id` = ?";
+    "UPDATE SpotifyData SET `LAST_FM_API_KEY` = ?, `SPOTIFY_CLIENT_ID` = ?, `SPOTIFY_CLIENT_SECRET`= ?, `SPOTIFY_TOKEN` = ?  WHERE `id` = ?";
 
   const values = [
-    req.body.VITE_LAST_FM_API_KEY,
-    req.body.VITE_SPOTIFY_CLIENT_ID,
-    req.body.VITE_SPOTIFY_CLIENT_ID,
+    req.body.LAST_FM_API_KEY,
+    req.body.SPOTIFY_CLIENT_ID,
+    req.body.SPOTIFY_CLIENT_SECRET,
+    req.body.SPOTIFY_TOKEN,
   ];
 
   connection.query(q, [...values], (err) => {

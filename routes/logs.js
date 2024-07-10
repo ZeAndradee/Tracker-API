@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/logs", addLog);
 
-router.get("/logs:trackurl", getLog);
+router.get("/logs/:trackurl", getLog);
 
 router.put("/logs/:id", updateLog);
 

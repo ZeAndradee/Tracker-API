@@ -2,7 +2,7 @@ import connection from "../config.js";
 
 export const addSpotifyData = (req, res) => {
   const q =
-    "INSERT INTO SpotifyData(`LAST_FM_API_KEY`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`,`SPOTIFY_TOKEN`) VALUES(?)";
+    "INSERT INTO spotifydata(`LAST_FM_API_KEY`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`,`SPOTIFY_TOKEN`) VALUES(?)";
 
   const values = [
     req.body.LAST_FM_API_KEY,
@@ -19,7 +19,7 @@ export const addSpotifyData = (req, res) => {
 };
 
 export const getSpotifyData = (_, res) => {
-  const q = "SELECT * FROM SpotifyData";
+  const q = "SELECT * FROM spotifydata";
 
   connection.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -30,7 +30,7 @@ export const getSpotifyData = (_, res) => {
 
 export const updateSpotifyData = (req, res) => {
   const q =
-    "UPDATE SpotifyData SET `LAST_FM_API_KEY` = ?, `SPOTIFY_CLIENT_ID` = ?, `SPOTIFY_CLIENT_SECRET`= ?, `SPOTIFY_TOKEN` = ?  WHERE `id` = ?";
+    "UPDATE spotifydata SET `LAST_FM_API_KEY` = ?, `SPOTIFY_CLIENT_ID` = ?, `SPOTIFY_CLIENT_SECRET`= ?, `SPOTIFY_TOKEN` = ?  WHERE `id` = ?";
 
   const values = [
     req.body.LAST_FM_API_KEY,
@@ -47,7 +47,7 @@ export const updateSpotifyData = (req, res) => {
 };
 
 export const deleteSpotifyData = (req, res) => {
-  const q = "DELETE FROM SpotifyData WHERE `id` = ?";
+  const q = "DELETE FROM spotifydata WHERE `id` = ?";
 
   connection.query(q, [req.params.id], (err) => {
     if (err) return res.json(err);

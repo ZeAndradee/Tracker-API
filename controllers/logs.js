@@ -20,14 +20,17 @@ export const addLog = (req, res) => {
 };
 
 export const getLog = (req, res) => {
-  var q;
+  let q;
+  let queryParams = [];
+
   if (req.params.trackurl) {
-    q = "SELECT * FROM logs WHERE `trackurl` = ?";
+    q = "SELECT * FROM logs WHERE `track_url` = ?";
+    queryParams.push(req.params.trackurl);
   } else {
     q = "SELECT * FROM logs";
   }
 
-  connection.query(q, (err, data) => {
+  connection.query(q, queryParams, (err, data) => {
     if (err) return res.json(err);
 
     return res.status(200).json(data);

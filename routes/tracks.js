@@ -4,7 +4,7 @@ import {
   addTrack,
   deleteTrack,
   updateTrack,
-} from "../controllers/logs.js";
+} from "../controllers/tracks.js";
 
 const router = express.Router();
 

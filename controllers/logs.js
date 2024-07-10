@@ -21,8 +21,8 @@ export const addLog = (req, res) => {
 
 export const getLog = (req, res) => {
   var q;
-  if (req.params.id) {
-    q = "SELECT * FROM logs WHERE `id` = ?";
+  if (req.params.trackurl) {
+    q = "SELECT * FROM logs WHERE `trackurl` = ?";
   } else {
     q = "SELECT * FROM logs";
   }

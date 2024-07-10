@@ -19,8 +19,13 @@ export const addLog = (req, res) => {
   });
 };
 
-export const getLog = (_, res) => {
-  const q = "SELECT * FROM logs";
+export const getLog = (req, res) => {
+  var q;
+  if (req.params.id) {
+    q = "SELECT * FROM logs WHERE `id` = ?";
+  } else {
+    q = "SELECT * FROM logs";
+  }
 
   connection.query(q, (err, data) => {
     if (err) return res.json(err);

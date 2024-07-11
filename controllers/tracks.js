@@ -13,7 +13,10 @@ export const addTrack = (req, res) => {
   });
 };
 
-export const getTrack = (_, res) => {
+export const getTrack = (req, res) => {
+  let q;
+  let queryParams = [];
+
   if (req.params.trackurl) {
     q = "SELECT * FROM tracks WHERE `track_url` = ?";
     queryParams.push(req.params.trackurl);
@@ -27,6 +30,7 @@ export const getTrack = (_, res) => {
     return res.status(200).json(data);
   });
 };
+
 
 export const updateTrack = (req, res) => {
   const q =

@@ -14,9 +14,14 @@ export const addTrack = (req, res) => {
 };
 
 export const getTrack = (_, res) => {
-  const q = "SELECT * FROM tracks";
+  if (req.params.trackurl) {
+    q = "SELECT * FROM tracks WHERE `track_url` = ?";
+    queryParams.push(req.params.trackurl);
+  } else {
+    q = "SELECT * FROM tracks";
+  }
 
-  connection.query(q, (err, data) => {
+  connection.query(q, queryParams, (err, data) => {
     if (err) return res.json(err);
 
     return res.status(200).json(data);

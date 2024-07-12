@@ -36,4 +36,12 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error("Erro ao iniciar o servidor:", err);
+    return;
+  }
+  console.log(`Servidor está rodando na porta ${PORT}`);
+});
+
 export default connection;

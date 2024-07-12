@@ -2,10 +2,10 @@ import connection from "../config.js";
 
 export const addTrack = (req, res) => {
   const q =
-    "INSERT INTO tracks(`track_url`,`track_name`, `rating`, `total_reviews`) VALUES(?)";
+    "INSERT INTO tracks(`track_id`,`track_name`, `rating`, `total_reviews`) VALUES(?)";
 
   const values = [
-    req.body.track_url,
+    req.body.track_id,
     req.body.track_name,
     req.body.rating,
     req.body.total_reviews,
@@ -23,7 +23,7 @@ export const getTrack = (req, res) => {
   let queryParams = [];
 
   if (req.params.trackurl) {
-    q = "SELECT * FROM tracks WHERE `track_url` = ?";
+    q = "SELECT * FROM tracks WHERE `track_id` = ?";
     queryParams.push(req.params.trackurl);
   } else {
     q = "SELECT * FROM tracks";
@@ -38,10 +38,10 @@ export const getTrack = (req, res) => {
 
 export const updateTrack = (req, res) => {
   const q =
-    "UPDATE tracks SET `track_url` = ?,`track_name` = ?, `rating` = ?, `total_reviews` = ? WHERE `id` = ?";
+    "UPDATE tracks SET `track_id` = ?,`track_name` = ?, `rating` = ?, `total_reviews` = ? WHERE `id` = ?";
 
   const values = [
-    req.body.track_url,
+    req.body.track_id,
     req.body.track_name,
     req.body.rating,
     req.body.total_reviews,

@@ -2,9 +2,14 @@ import connection from "../config.js";
 
 export const addTrack = (req, res) => {
   const q =
-    "INSERT INTO tracks(`track_url`, `rating`, `total_reviews`) VALUES(?)";
+    "INSERT INTO tracks(`track_url`,`track_name`, `rating`, `total_reviews`) VALUES(?)";
 
-  const values = [req.body.track_url, req.body.rating, req.body.total_reviews];
+  const values = [
+    req.body.track_url,
+    req.body.track_name,
+    req.body.rating,
+    req.body.total_reviews,
+  ];
 
   connection.query(q, [values], (err) => {
     if (err) return res.json(err);
@@ -31,13 +36,13 @@ export const getTrack = (req, res) => {
   });
 };
 
-
 export const updateTrack = (req, res) => {
   const q =
-    "UPDATE tracks SET `track_url` = ?, `rating` = ?, `total_reviews` = ? WHERE `id` = ?";
+    "UPDATE tracks SET `track_url` = ?,`track_name` = ?, `rating` = ?, `total_reviews` = ? WHERE `id` = ?";
 
   const values = [
     req.body.track_url,
+    req.body.track_name,
     req.body.rating,
     req.body.total_reviews,
     req.params.id,

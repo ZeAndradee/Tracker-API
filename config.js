@@ -3,12 +3,23 @@ import mysql from "mysql2";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import os from "os";
 
 dotenvConfig();
 
 // Resolve the __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// Função para criar um arquivo temporário com o conteúdo do certificado
+function createTempCertFile(certContent) {
+  const tempFilePath = `${os.tmpdir()}/temp-ca-certificate.crt`;
+  fs.writeFileSync(tempFilePath, certContent);
+  return tempFilePath;
+}
+
+const sslCertContent = process.env.SSL_CERT.replace(/\\n/g, "\n");
+const sslCertPath = createTempCertFile(sslCertContent);
 
 const connectionConfig = {
   host: process.env.DB_HOST,
@@ -17,7 +28,7 @@ const connectionConfig = {
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
   ssl: {
-    ca: fs.readFileSync(`${__dirname}/certs/ca-certificate.crt`), // caminho do certificado
+    ca: fs.readFileSync(sslCertPath), // caminho do certificado temporário
   },
 };
 

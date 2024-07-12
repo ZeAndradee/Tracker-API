@@ -1,9 +1,14 @@
 import { config as dotenvConfig } from "dotenv";
 import mysql from "mysql2";
 import fs from "fs";
-import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 dotenvConfig();
+
+// Resolve the __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const connectionConfig = {
   host: process.env.DB_HOST,
@@ -12,7 +17,7 @@ const connectionConfig = {
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
   ssl: {
-    ca: fs.readFileSync(path.resolve(__dirname, "certs/ca-certificate.crt")),
+    ca: fs.readFileSync(`${__dirname}/certs/ca-certificate.crt`),
   },
 };
 
@@ -25,4 +30,5 @@ connection.connect((err) => {
   }
   console.log("Conectado ao banco de dados!");
 });
+
 export default connection;

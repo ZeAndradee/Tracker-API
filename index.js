@@ -15,4 +15,12 @@ app.use("/", spotifyInfoRoutes);
 app.use("/", logsRoutes);
 app.use("/", tracksRoutes);
 
-app.listen(3000);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error("Erro ao iniciar o servidor:", err);
+    return;
+  }
+  console.log(`Servidor está rodando na porta ${PORT}`);
+});

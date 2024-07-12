@@ -3,7 +3,6 @@ import mysql from "mysql2";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import express from "express";
 
 dotenvConfig();
 
@@ -30,18 +29,6 @@ connection.connect((err) => {
     return;
   }
   console.log("Conectado ao banco de dados!");
-});
-
-const app = express();
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, (err) => {
-  if (err) {
-    console.error("Erro ao iniciar o servidor:", err);
-    return;
-  }
-  console.log(`Servidor está rodando na porta ${PORT}`);
 });
 
 export default connection;

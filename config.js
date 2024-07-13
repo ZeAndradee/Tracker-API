@@ -28,7 +28,7 @@ const connectionConfig = {
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
   ssl: {
-    ca: fs.readFileSync(sslCertPath), // caminho do certificado temporário
+    ca: fs.readFileSync(sslCertPath),
   },
 };
 

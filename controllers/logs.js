@@ -2,10 +2,10 @@ import connection from "../config.js";
 
 export const addLog = (req, res) => {
   const q =
-    "INSERT INTO logs(`track_url`, `username`, `date`, `rating`, `comment`) VALUES(?)";
+    "INSERT INTO logs(`track_id`, `username`, `date`, `rating`, `comment`) VALUES(?)";
 
   const values = [
-    req.body.track_url,
+    req.body.track_id,
     req.body.username,
     req.body.date,
     req.body.rating,
@@ -24,7 +24,7 @@ export const getLog = (req, res) => {
   let queryParams = [];
 
   if (req.params.trackurl) {
-    q = "SELECT * FROM logs WHERE `track_url` = ?";
+    q = "SELECT * FROM logs WHERE `track_id` = ?";
     queryParams.push(req.params.trackurl);
   } else {
     q = "SELECT * FROM logs";
@@ -39,10 +39,10 @@ export const getLog = (req, res) => {
 
 export const updateLog = (req, res) => {
   const q =
-    "UPDATE logs SET `track_url` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ? WHERE `id` = ?";
+    "UPDATE logs SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ? WHERE `id` = ?";
 
   const values = [
-    req.body.track_url,
+    req.body.track_id,
     req.body.username,
     req.body.date,
     req.body.rating,

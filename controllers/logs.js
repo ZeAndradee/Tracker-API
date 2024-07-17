@@ -2,7 +2,7 @@ import connection from "../config.js";
 
 export const addLog = (req, res) => {
   const q =
-    "INSERT INTO logs(`track_id`, `username`, `date`, `rating`, `comment`) VALUES(?)";
+    "INSERT INTO logs(`track_id`, `username`, `date`, `rating`, `comment`,`selected_date`) VALUES(?)";
 
   const values = [
     req.body.track_id,
@@ -10,6 +10,7 @@ export const addLog = (req, res) => {
     req.body.date,
     req.body.rating,
     req.body.comment,
+    req.body.selected_date,
   ];
 
   connection.query(q, [values], (err) => {
@@ -39,7 +40,7 @@ export const getLog = (req, res) => {
 
 export const updateLog = (req, res) => {
   const q =
-    "UPDATE logs SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ? WHERE `id` = ?";
+    "UPDATE logs SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ? WHERE `id` = ?";
 
   const values = [
     req.body.track_id,
@@ -47,6 +48,7 @@ export const updateLog = (req, res) => {
     req.body.date,
     req.body.rating,
     req.body.comment,
+    req.body.selected_date,
     req.params.id,
   ];
 

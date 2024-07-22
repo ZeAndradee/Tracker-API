@@ -7,6 +7,7 @@ router.post("/logs", addLog);
 
 router.get("/logs", getLog);
 router.get("/logs/:trackurl", getLog);
+router.get("/logs/:username", getLog);
 
 router.put("/logs/:id", updateLog);
 

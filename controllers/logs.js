@@ -24,18 +24,18 @@ export const getLog = (req, res) => {
   let q;
   let queryParams = [];
 
-  console.log("Username", req.params.username);
-
-  if (req.params.trackurl) {
+  if (req.params.username && req.params.trackid) {
+    q = "SELECT * FROM usertracks WHERE `username` = ? AND `track_id` = ?";
+    queryParams.push(req.params.username, req.params.trackid);
+  } else if (req.params.trackid) {
     q = "SELECT * FROM logs WHERE `track_id` = ?";
-    queryParams.push(req.params.trackurl);
+    queryParams.push(req.params.trackid);
   } else if (req.params.username) {
     q = "SELECT * FROM logs WHERE `username` = ?";
     queryParams.push(req.params.username);
   } else {
     q = "SELECT * FROM logs";
   }
-
   connection.query(q, queryParams, (err, data) => {
     if (err) return res.json(err);
 

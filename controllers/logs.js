@@ -25,10 +25,10 @@ export const getLog = (req, res) => {
   let queryParams = [];
 
   if (req.params.username && req.params.trackid) {
-    q = "SELECT * FROM usertracks WHERE `username` = ? AND `track_id` = ?";
+    q = "SELECT * FROM usertracks WHERE `username` = ? AND `trackid` = ?";
     queryParams.push(req.params.username, req.params.trackid);
   } else if (req.params.trackid) {
-    q = "SELECT * FROM logs WHERE `trackid` = ?";
+    q = "SELECT * FROM logs WHERE `track_id` = ?";
     queryParams.push(req.params.trackid);
   } else if (req.params.username) {
     q = "SELECT * FROM logs WHERE `username` = ?";

@@ -20,6 +20,26 @@ export const addLog = (req, res) => {
   });
 };
 
+export const addLogUser = (req, res) => {
+  const q =
+    "INSERT INTO usertracks( `username`, `trackname`, `trackid`, `rating`,`listened`,`liked`) VALUES(?)";
+
+  const values = [
+    req.body.username,
+    req.body.trackname,
+    req.body.trackid,
+    req.body.rating,
+    req.body.listened,
+    req.body.liked,
+  ];
+
+  connection.query(q, [values], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Log user adicionado com sucesso.");
+  });
+};
+
 export const getLog = (req, res) => {
   let q;
   let queryParams = [];
@@ -45,7 +65,27 @@ export const getLog = (req, res) => {
 
 export const updateLog = (req, res) => {
   const q =
-    "UPDATE logs SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ? WHERE `id` = ?";
+    "UPDATE logs SET `username` = ?, `trackname` = ?, `trackid` = ?, `rating` = ?, `listened` = ?,`liked` = ? WHERE `id` = ?";
+
+  const values = [
+    req.body.username,
+    req.body.trackname,
+    req.body.trackid,
+    req.body.rating,
+    req.body.listened,
+    req.body.liked,
+    req.params.id,
+  ];
+
+  connection.query(q, [...values], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json("Log user alterado com sucesso.");
+  });
+};
+
+export const updateLogUser = (req, res) => {
+  const q =
+    "UPDATE usertracks SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ? WHERE `id` = ?";
 
   const values = [
     req.body.track_id,
@@ -70,5 +110,15 @@ export const deleteLog = (req, res) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Log deletado com sucesso.");
+  });
+};
+
+export const deleteLogUser = (req, res) => {
+  const q = "DELETE FROM usertracks WHERE `id` = ?";
+
+  connection.query(q, [req.params.id], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Log User deletado com sucesso.");
   });
 };

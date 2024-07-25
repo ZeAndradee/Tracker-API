@@ -65,26 +65,6 @@ export const getLog = (req, res) => {
 
 export const updateLog = (req, res) => {
   const q =
-    "UPDATE logs SET `username` = ?, `trackname` = ?, `trackid` = ?, `rating` = ?, `listened` = ?,`liked` = ? WHERE `id` = ?";
-
-  const values = [
-    req.body.username,
-    req.body.trackname,
-    req.body.trackid,
-    req.body.rating,
-    req.body.listened,
-    req.body.liked,
-    req.params.id,
-  ];
-
-  connection.query(q, [...values], (err) => {
-    if (err) return res.json(err);
-    return res.status(200).json("Log user alterado com sucesso.");
-  });
-};
-
-export const updateLogUser = (req, res) => {
-  const q =
     "UPDATE usertracks SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ? WHERE `id` = ?";
 
   const values = [
@@ -100,6 +80,26 @@ export const updateLogUser = (req, res) => {
   connection.query(q, [...values], (err) => {
     if (err) return res.json(err);
     return res.status(200).json("Log alterado com sucesso.");
+  });
+};
+
+export const updateLogUser = (req, res) => {
+  const q =
+    "UPDATE logs SET `username` = ?, `trackname` = ?, `trackid` = ?, `rating` = ?, `listened` = ?,`liked` = ? WHERE `id` = ?";
+
+  const values = [
+    req.body.username,
+    req.body.trackname,
+    req.body.trackid,
+    req.body.rating,
+    req.body.listened,
+    req.body.liked,
+    req.params.id,
+  ];
+
+  connection.query(q, [...values], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json("Log user alterado com sucesso.");
   });
 };
 

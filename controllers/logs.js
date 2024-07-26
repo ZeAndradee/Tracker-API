@@ -2,7 +2,7 @@ import connection from "../config.js";
 
 export const addLog = (req, res) => {
   const q =
-    "INSERT INTO logs(`track_id`, `username`, `date`, `rating`, `comment`,`selected_date`) VALUES(?)";
+    "INSERT INTO logs(`track_id`, `username`, `date`, `rating`, `comment`,`selected_date`,`liked`, `listened`) VALUES(?)";
 
   const values = [
     req.body.track_id,
@@ -11,6 +11,9 @@ export const addLog = (req, res) => {
     req.body.rating,
     req.body.comment,
     req.body.selected_date,
+    req.body.selected_date,
+    req.body.liked,
+    req.body.listened,
   ];
 
   connection.query(q, [values], (err) => {
@@ -20,32 +23,12 @@ export const addLog = (req, res) => {
   });
 };
 
-export const addLogUser = (req, res) => {
-  const q =
-    "INSERT INTO usertracks( `username`, `trackname`, `trackid`, `rating`,`listened`,`liked`) VALUES(?)";
-
-  const values = [
-    req.body.username,
-    req.body.trackname,
-    req.body.trackid,
-    req.body.rating,
-    req.body.listened,
-    req.body.liked,
-  ];
-
-  connection.query(q, [values], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Log user adicionado com sucesso.");
-  });
-};
-
 export const getLog = (req, res) => {
   let q;
   let queryParams = [];
-
+  //change
   if (req.params.username && req.params.trackid) {
-    q = "SELECT * FROM usertracks WHERE `username` = ? AND `trackid` = ?";
+    q = "SELECT * FROM logs WHERE `username` = ? AND `track_id` = ?";
     queryParams.push(req.params.username, req.params.trackid);
   } else if (req.params.trackid) {
     q = "SELECT * FROM logs WHERE `track_id` = ?";
@@ -65,7 +48,7 @@ export const getLog = (req, res) => {
 
 export const updateLog = (req, res) => {
   const q =
-    "UPDATE usertracks SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ? WHERE `id` = ?";
+    "UPDATE usertracks SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ?,`liked` = ?, `listened` = ? WHERE `id` = ?";
 
   const values = [
     req.body.track_id,
@@ -74,32 +57,14 @@ export const updateLog = (req, res) => {
     req.body.rating,
     req.body.comment,
     req.body.selected_date,
+    req.body.liked,
+    req.body.listened,
     req.params.id,
   ];
 
   connection.query(q, [...values], (err) => {
     if (err) return res.json(err);
     return res.status(200).json("Log alterado com sucesso.");
-  });
-};
-
-export const updateLogUser = (req, res) => {
-  const q =
-    "UPDATE logs SET `username` = ?, `trackname` = ?, `trackid` = ?, `rating` = ?, `listened` = ?,`liked` = ? WHERE `id` = ?";
-
-  const values = [
-    req.body.username,
-    req.body.trackname,
-    req.body.trackid,
-    req.body.rating,
-    req.body.listened,
-    req.body.liked,
-    req.params.id,
-  ];
-
-  connection.query(q, [...values], (err) => {
-    if (err) return res.json(err);
-    return res.status(200).json("Log user alterado com sucesso.");
   });
 };
 
@@ -110,15 +75,5 @@ export const deleteLog = (req, res) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Log deletado com sucesso.");
-  });
-};
-
-export const deleteLogUser = (req, res) => {
-  const q = "DELETE FROM usertracks WHERE `id` = ?";
-
-  connection.query(q, [req.params.id], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Log User deletado com sucesso.");
   });
 };

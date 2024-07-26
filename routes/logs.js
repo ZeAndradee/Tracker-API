@@ -1,13 +1,5 @@
 import express from "express";
-import {
-  getLog,
-  addLog,
-  deleteLog,
-  updateLog,
-  updateLogUser,
-  deleteLogUser,
-  addLogUser,
-} from "../controllers/logs.js";
+import { getLog, addLog, deleteLog, updateLog } from "../controllers/logs.js";
 
 const router = express.Router();
 

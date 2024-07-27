@@ -11,7 +11,6 @@ export const addLog = (req, res) => {
     req.body.rating,
     req.body.comment,
     req.body.selected_date,
-    req.body.selected_date,
     req.body.liked,
     req.body.listened,
   ];

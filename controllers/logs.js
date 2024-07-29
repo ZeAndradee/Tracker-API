@@ -47,7 +47,7 @@ export const getLog = (req, res) => {
 
 export const updateLog = (req, res) => {
   const q =
-    "UPDATE usertracks SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ?,`liked` = ?, `listened` = ? WHERE `id` = ?";
+    "UPDATE logs SET `track_id` = ?, `username` = ?, `date` = ?, `rating` = ?, `comment` = ?,`selected_date` = ?,`liked` = ?, `listened` = ? WHERE `id` = ?";
 
   const values = [
     req.body.track_id,

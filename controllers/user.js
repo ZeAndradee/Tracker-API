@@ -20,8 +20,13 @@ export const addUser = (req, res) => {
   });
 };
 
-export const getUser = (_, res) => {
-  const q = "SELECT * FROM user";
+export const getUser = (req, res) => {
+  if (req.params.trackurl) {
+    q = "SELECT * FROM user WHERE `id` = ?";
+    queryParams.push(req.params.trackurl);
+  } else {
+    q = "SELECT * FROM user";
+  }
 
   connection.query(q, (err, data) => {
     if (err) return res.json(err);

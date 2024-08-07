@@ -21,6 +21,9 @@ export const addUser = (req, res) => {
 };
 
 export const getUser = (req, res) => {
+  let q;
+  let queryParams = [];
+
   if (req.params.id) {
     q = "SELECT * FROM user WHERE `id` = ?";
     queryParams.push(req.params.id);
@@ -28,7 +31,7 @@ export const getUser = (req, res) => {
     q = "SELECT * FROM user";
   }
 
-  connection.query(q, (err, data) => {
+  connection.query(q, queryParams, (err, data) => {
     if (err) return res.json(err);
 
     return res.status(200).json(data);

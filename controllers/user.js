@@ -21,9 +21,9 @@ export const addUser = (req, res) => {
 };
 
 export const getUser = (req, res) => {
-  if (req.params.trackurl) {
+  if (req.params.id) {
     q = "SELECT * FROM user WHERE `id` = ?";
-    queryParams.push(req.params.trackurl);
+    queryParams.push(req.params.id);
   } else {
     q = "SELECT * FROM user";
   }
